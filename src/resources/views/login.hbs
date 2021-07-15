@@ -1,5 +1,22 @@
 <div class="container">
-<form action="/user/login" method="POST" class="col-6" style = "margin-top: 200px; margin-bottom: 200px;">
+    
+    {{#if alertlogin }}
+    <div class="alert alert-warning alert-dismissible fade show" style="margin-top: 100px;" role="alert">
+  <strong>Bạn chưa đăng nhập !</strong> Vui lòng đăng nhập để thực hiện chức năng này.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {{/if}}
+    {{#if alertCheck }}
+    <div class="alert alert-warning alert-dismissible fade show" style="margin-top: 100px;" role="alert">
+  <strong>Sai tên đăng nhập hoặc mật khẩu!</strong> Mời đăng nhập lại.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {{/if}}
+<form action="/user/login" method="POST" class="col-6" style = "margin-top: 100px; margin-bottom: 200px;">
     <div class="form-group mb-3">
         <label for="un">Username</label>
         <input type="text" class="form-control bg-info" name="username" id="un">

@@ -25,6 +25,10 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 60000 }
 }));
+app.use(function(req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 // app.use(morgan('combined'));
 
 // var checkAdmin = (req, res, next) => {
