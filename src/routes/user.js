@@ -7,14 +7,33 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 router.post('/login', (req, res) => {
-    var newUser = User.findOne({ username: req.body.username }, function(err, user) {
-        req.session.username = req.body.username
-        req.session.password = req.body.password
-        console.log(req.session)
-        res.render('home')
+    User.findOne({
+        'username': req.body.username,
+        password: req.body.password
+    }, function(err, user) {
+
+        try {
+
+            req.session.username = user.username
+            req.session.password = user.password
+            req.session.login = true
+            console.log(req.body.username, res.locals.session)
+            return res.redirect('/')
+
+
+        } catch (error) {
+            var alertCheck = 1;
+            res.render('login', { alertCheck })
+        }
+
 
 
     })
 
+})
+router.get('/logout', (req, res) => {
+    req.session.destroy(function(err) {
+        return res.redirect('/')
+    })
 })
 module.exports = router;
